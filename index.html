@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url("./assets/background.gif");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: white;
+      font-weight: bold;
+    }
+
+    #mainContainer {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 10px;
+      margin: auto;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 15px;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.06);
+    }
+  </style>
+</head>
+<body>
+  <div id="mainContainer">
+    <img src="./assets/logo.png" width="400px" height="400px">
+    <h1 id="countdown">Stuck in the Matrix Productions Service</h1>
+
+    <button id="button" onclick="timer()">LAUNCH WEBSITE</button>
+    <p id="footer">© 2025 - 2025 StuckInTheMatrix - All Rights Reserved.</p>
+  </div>
+  
+  <script>
+    function timer() {
+      let time = 10;
+      document.getElementById("countdown").innerHTML = time;
+      document.getElementById("button").style.display = "none";
+      const timer = setInterval(() => {
+          time--;
+          document.getElementById("countdown").innerHTML = time;
+          if (time <= 0) {
+              clearInterval(timer);
+              window.location.href = "queue.html";
+          }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Queue System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      padding: 20px;
+      margin: 0;
+      background-color: #101010;
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: white;
+      background-image: url("assets/background.gif");
+    }
+    h2 {
+      text-align: center;
+    }
+    hr {
+      border: none;
+      height: 1px;
+      background-color: #ccc;
+      opacity: 0.5;
+      margin: 20px 0;
+    }
+    #mainContainer {
+      margin: auto;
+      background-color: rgb(48, 41, 41);
+      max-width: 800px;
+      width: 100%;
+      border-radius: 15px;
+      padding: 20px;
+    }
+    #inputContainer {
+      display: flex;
+      text-wrap: wrap;
+      gap: 20px;
+    }
+    #inputContainer input {
+      padding: 8px;
+      border-radius: 10px;
+      font-size: 1.01rem;
+      transition: 0.3s ease;
+    }
+    #inputContainer input:valid {
+      border: 2px solid green;
+      background-color: #cdf3c4;
+    }
+
+
+
+
+    #inputContainer input:invalid {
+      border: 2px solid red;
+      background-color: #f3c4c4;
+    }
+    #inputContainer button, #adminlist button {
+      padding: 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.1s ease;
+      font-weight: bold;
+      border: none;
+    }
+    #inputContainer button:hover, #adminlist button:hover {
+      transform: scale(1.06);
+      border: 2px solid rgb(255, 255, 255);
+    }
+    #adminlist, #list {
+      font-size: 1.4rem;
+    }
+    #delete {
+      background-color: rgb(236, 150, 150);
+      color: black;
+    }
+    #serve, #join {
+      background-color: rgb(177, 236, 150);
+      color: black;
+    }
+    #currentQueue, #adminPanel {
+      background-color: #1d1c1c;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      padding: 20px;
+    }
+    #currentQueue:hover, #adminPanel:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgb(0, 0, 0, 0.5);
+    }
+    #footer {
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="mainContainer">
+    <h2>Canteen Queue Management System </h2>
+    <div id="inputContainer">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="text" id="purpose" placeholder="Purpose" required>
+      <input type="number" id="idnumber" placeholder="ID Number" required>
+      <button id="join" onclick="joinQueue()">Join Queue</button>
+    </div>
+    <hr>
+    <div id="currentQueue">
+      <h2>Current Queue</h2>
+      <p id="list"></p>
+    </div>
+    <hr>
+    <div id="adminPanel">
+      <h2>Admin Panel</h2>
+      <p id="adminlist"></p>
+    </div>
+  </div>
+  <div id="footer">
+    <p>© 2025 - 2025 StuckInTheMatrix - All Rights Reserved.</p>
+  </div>
+
+  <script>
+    function joinQueue() {
+      const nameinput = document.getElementById("name");
+      const purposeinput = document.getElementById("purpose");
+      const idnumberinput = document.getElementById("idnumber");
+      const name = nameinput.value.trim();
+      const purpose = purposeinput.value.trim();
+      const idnumber = idnumberinput.value.trim();
+
+      if (!name || !purpose || !idnumber) {
+        alert("Please input your NAME, PURPOSE, and ID NUMBER properly.");
+        return;
+      }
+
+      const info = {name, purpose, idnumber};
+      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array
+      queue.push(info); // push info in local storage
+      localStorage.setItem("queue", JSON.stringify(queue)); // convert to string and save the array in local storage
+      nameinput.value = "";
+      purposeinput.value = "";
+      idnumberinput.value = "";
+
+      display();
+    }
+    function display() {
+      const list = document.getElementById("list");
+      const adminlist = document.getElementById("adminlist")
+      const queue = JSON.parse(localStorage.getItem("queue")) || [];
+
+      list.innerHTML = queue.map((entry,index) =>{
+        return `• <b>${index + 1}.</b> ${entry.name} - ${entry.purpose}`;
+      }).join("<br><br>");
+
+      adminlist.innerHTML = queue.map((entry,index) =>{
+        return `
+          <div>
+            • <b>${index + 1}.</b> ${entry.name} (${entry.idnumber}) - ${entry.purpose}
+            <button id="serve" onclick="serve(${index})">Serve</button>
+            <button id="delete" onclick="remove(${index})">Remove</button>
+          <div>
+        `;
+      }).join("<br>");
+    }
+    function serve(index){
+      const queue = JSON.parse(localStorage.getItem("queue")) || [];
+      if (index === 0){
+        queue.shift(); // remove the first user in the list using shift();
+      } else {
+        alert("you can only serve people when they're first in line.");
+      }
+      localStorage.setItem("queue", JSON.stringify(queue));
+      display();
+    }
+    function remove(index) {
+      const queue = JSON.parse(localStorage.getItem("queue")) || [];
+      queue.splice(index, 1); // remove the user in a specific index using splice();
+      localStorage.setItem("queue", JSON.stringify(queue));
+      display();
+    }
+    window.onload = display;
+  </script>
+</body>
+</html>
