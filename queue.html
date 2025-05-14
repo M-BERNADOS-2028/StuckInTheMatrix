@@ -33,7 +33,7 @@
     #mainContainer {
       margin: auto;
       background-color: rgb(48, 41, 41);
-      max-width: 800px;
+      max-width: 900px;
       width: 100%;
       border-radius: 15px;
       padding: 20px;
@@ -108,6 +108,7 @@
       <input type="text" id="purpose" placeholder="Purpose" required>
       <input type="number" id="idnumber" placeholder="ID Number" required>
       <button id="join" onclick="joinQueue()">Join Queue</button>
+      <button id="clear" onclick="removeall()">Clear Queue</button>
     </div>
     <hr>
     <div id="currentQueue">
@@ -181,6 +182,10 @@
       const queue = JSON.parse(localStorage.getItem("queue")) || [];
       queue.splice(index, 1); // remove the user in a specific index using splice();
       localStorage.setItem("queue", JSON.stringify(queue));
+      display();
+    }
+    function removeall() {
+      localStorage.clear();
       display();
     }
     window.onload = display;
