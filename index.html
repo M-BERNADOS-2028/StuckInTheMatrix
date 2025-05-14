@@ -21,6 +21,7 @@
   <script>
     function timer() {
       let time = 10;
+      document.getElementById("countdown").style.display = "block";
       document.getElementById("countdown").style.fontSize = "4rem";
       document.getElementById("countdown").innerHTML = time;
       document.getElementById("button").style.display = "none";
@@ -30,6 +31,8 @@
             document.getElementById("countdown").innerHTML = time;
             if (time <= 3) {
               document.getElementById("countdown").style.color = "red";
+            } else if (time === 5 || time === 4) {
+              document.getElementById("countdown").style.color = "orange";
             }
           } else if (time === 0) {
             document.getElementById("countdown").innerHTML = "You are now stuck in the matrix.";
