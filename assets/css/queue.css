@@ -1,0 +1,86 @@
+* {
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  padding: 20px;
+  margin: 0;
+  background-color: #101010;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  background-image: url("/assets/background.gif");
+}
+h2 {
+  text-align: center;
+}
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  opacity: 0.5;
+  margin: 20px 0;
+}
+#main {
+  margin: auto;
+  background-color: rgb(48, 41, 41);
+  max-width: 900px;
+  width: 100%;
+  border-radius: 15px;
+  padding: 20px;
+}
+#input {
+  display: flex;
+  text-wrap: wrap;
+  gap: 20px;
+}
+#input input {
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 1.01rem;
+  transition: 0.3s ease;
+}
+#input input:valid {
+  border: 2px solid green;
+  background-color: #cdf3c4;
+}
+#input input:invalid {
+  border: 2px solid red;
+  background-color: #f3c4c4;
+}
+#input button, #adminlist button {
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.1s ease;
+  font-weight: bold;
+  border: none;
+}
+#input button:hover, #adminlist button:hover {
+  transform: scale(1.06);
+  border: 2px solid rgb(255, 255, 255);
+}
+#adminlist, #list {
+  font-size: 1.4rem;
+}
+#delete, #clear {
+  background-color: rgb(236, 150, 150);
+  color: black;
+}
+#serve, #join {
+  background-color: rgb(177, 236, 150);
+  color: black;
+}
+#currentqueue, #adminpanel {
+  background-color: #1d1c1c;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  padding: 20px;
+}
+#currentqueue:hover, #adminpanel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgb(0, 0, 0, 0.5);
+}
+#footer {
+  text-align: center;
+  font-weight: bold;
+}
