@@ -19,7 +19,7 @@
   </div>
   
   <script>
-    function timer() {
+    function timer() { // making a timer for surpise
       let time = 10;
       document.getElementById("countdown").style.display = "block";
       document.getElementById("countdown").style.fontSize = "4rem";
@@ -30,17 +30,17 @@
           if (time > 0) {
             document.getElementById("countdown").innerHTML = time;
             if (time <= 3) {
-              document.getElementById("countdown").style.color = "red";
+              document.getElementById("countdown").style.color = "red"; // change the color of the timer as it reaches a certain number
             } else if (time === 5 || time === 4) {
-              document.getElementById("countdown").style.color = "orange";
+              document.getElementById("countdown").style.color = "orange"; // change the color of the timer as it reaches a certain number
             }
           } else if (time === 0) {
-            document.getElementById("countdown").innerHTML = "You are now stuck in the matrix.";
+            document.getElementById("countdown").innerHTML = "You are now stuck in the matrix."; // it will display new text
           } else {
-            clearInterval(timer);
-            window.location.href = "queue.html";
+            clearInterval(timer); // stop timer
+            window.location.href = "queue.html"; // open a new html page 
           }
-      }, 1000);
+      }, 1000); // every 1 second
     }
   </script>
 </body>
