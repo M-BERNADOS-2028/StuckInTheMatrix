@@ -39,11 +39,11 @@
       const nameinput = document.getElementById("name");
       const purposeinput = document.getElementById("purpose");
       const idnumberinput = document.getElementById("idnumber");
-      const name = nameinput.value.trim();
-      const purpose = purposeinput.value.trim();
+      const name = nameinput.value.trim(); // trimming the values will get rid of extra whitespaces in the input
+      const purpose = purposeinput.value.trim(); // making it CLEANNNNNN
       const idnumber = idnumberinput.value.trim();
 
-      if (!name || !purpose || !idnumber) {
+      if (!name || !purpose || !idnumber) { // if there is NO NAME or PURPOSE or ID NUMBER then it will not allow the user to join the queue
         alert("Please input your NAME, PURPOSE, and ID NUMBER properly.");
         return;
       }
@@ -53,6 +53,8 @@
       queue.push(info); // push info in local storage
       localStorage.setItem("queue", JSON.stringify(queue)); // convert to string and save the array in local storage
       // note that localStorage only saves STRINGs
+
+      // reset input values [to avoid spamming]
       nameinput.value = "";
       purposeinput.value = "";
       idnumberinput.value = "";
@@ -63,7 +65,7 @@
       const list = document.getElementById("list");
       const adminlist = document.getElementById("adminlist")
       const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array
-      list.innerHTML = queue.map((entry,index) =>{
+      list.innerHTML = queue.map((entry,index) =>{ // map builds a new array of display [that you can customize however you'd like]
         return `• <b>${index + 1}.</b> ${entry.name} - ${entry.purpose}`;
       }).join("<br><br>");
       adminlist.innerHTML = queue.map((entry,index) =>{
@@ -78,25 +80,25 @@
     }
     function serve(index){
       const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array
-      if (index === 0){
+      if (index === 0){ 
         queue.shift(); // remove the first user in the list using shift();
       } else {
         alert("you can only serve people when they're first in line.");
       }
-      localStorage.setItem("queue", JSON.stringify(queue));
-      display();
+      localStorage.setItem("queue", JSON.stringify(queue)); // convert to string and save the array in local storage
+      display(); // update display
     }
     function remove(index) {
       const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array
       queue.splice(index, 1); // remove the user in a specific index using splice();
-      localStorage.setItem("queue", JSON.stringify(queue));
-      display();
+      localStorage.setItem("queue", JSON.stringify(queue)); // convert to string and save the array in local storage
+      display(); // update display
     }
     function removeall() {
-      localStorage.clear();
-      display();
+      localStorage.clear(); // clear the localStorage
+      display(); // update display
     }
-    window.onload = display;
+    window.onload = display; // when the website finishes loading, it will run the display() function first 
   </script>
 </body>
 </html>
