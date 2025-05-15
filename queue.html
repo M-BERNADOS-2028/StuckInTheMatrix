@@ -62,7 +62,7 @@
     function display() {
       const list = document.getElementById("list");
       const adminlist = document.getElementById("adminlist")
-      const queue = JSON.parse(localStorage.getItem("queue")) || [];
+      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array
       list.innerHTML = queue.map((entry,index) =>{
         return `• <b>${index + 1}.</b> ${entry.name} - ${entry.purpose}`;
       }).join("<br><br>");
@@ -77,7 +77,7 @@
       }).join("<br>");
     }
     function serve(index){
-      const queue = JSON.parse(localStorage.getItem("queue")) || [];
+      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array
       if (index === 0){
         queue.shift(); // remove the first user in the list using shift();
       } else {
@@ -87,7 +87,7 @@
       display();
     }
     function remove(index) {
-      const queue = JSON.parse(localStorage.getItem("queue")) || [];
+      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array
       queue.splice(index, 1); // remove the user in a specific index using splice();
       localStorage.setItem("queue", JSON.stringify(queue));
       display();
