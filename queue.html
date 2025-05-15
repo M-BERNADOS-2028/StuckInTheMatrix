@@ -49,9 +49,9 @@
       }
 
       const info = {name, purpose, idnumber};
-      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array
+      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array [note that JSON.parse converts a JSON string into a usable javascript object/array]
       queue.push(info); // push info in local storage
-      localStorage.setItem("queue", JSON.stringify(queue)); // convert to string and save the array in local storage
+      localStorage.setItem("queue", JSON.stringify(queue)); // convert to string and save the array in local storage [note that JSON.stringify converts javascript objects/arrays into a JSON string]
       // note that localStorage only saves STRINGs
 
       // reset input values [to avoid spamming]
@@ -64,7 +64,7 @@
     function display() {
       const list = document.getElementById("list");
       const adminlist = document.getElementById("adminlist")
-      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array
+      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array [note that JSON.parse converts a JSON string into a usable javascript object/array]
       list.innerHTML = queue.map((entry,index) =>{ // map builds a new array of display [that you can customize however you'd like]
         return `• <b>${index + 1}.</b> ${entry.name} - ${entry.purpose}`;
       }).join("<br><br>");
@@ -79,19 +79,19 @@
       }).join("<br>");
     }
     function serve(index){
-      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array
+      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array [note that JSON.parse converts a JSON string into a usable javascript object/array]
       if (index === 0){ 
         queue.shift(); // remove the first user in the list using shift();
       } else {
         alert("you can only serve people when they're first in line.");
       }
-      localStorage.setItem("queue", JSON.stringify(queue)); // convert to string and save the array in local storage
+      localStorage.setItem("queue", JSON.stringify(queue)); // convert to string and save the array in local storage [note that JSON.stringify converts javascript objects/arrays into a JSON string]
       display(); // update display
     }
     function remove(index) {
-      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array
+      const queue = JSON.parse(localStorage.getItem("queue")) || []; // getting the values in localstorage if none then reset to default array [note that JSON.parse converts a JSON string into a usable javascript object/array]
       queue.splice(index, 1); // remove the user in a specific index using splice();
-      localStorage.setItem("queue", JSON.stringify(queue)); // convert to string and save the array in local storage
+      localStorage.setItem("queue", JSON.stringify(queue)); // convert to string and save the array in local storage [note that JSON.stringify converts javascript objects/arrays into a JSON string]
       display(); // update display
     }
     function removeall() {
